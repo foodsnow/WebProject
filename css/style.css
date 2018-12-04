@@ -169,7 +169,7 @@ header .navbar a:hover{
 .news .updates, .news .last_news{
 	width: 49%;
 }
-.news .news-block{
+.block{
 	position: relative;
 	height: 25px;
 	display: flex;
@@ -180,10 +180,10 @@ header .navbar a:hover{
 	align-items: center;
 	border-bottom: solid 4px #e25353;
 }
-.news .news-block span{
+.block span{
 	text-align: center;
 }
-.news .news-block a{
+.news .block a{
 	position: absolute;
 	right: 10px;
 	color: white;
@@ -209,6 +209,17 @@ header .navbar a:hover{
 	transition: 0.3s;
 }
 
+.content-wrapper{
+	display: flex;
+}
+.content-wrapper .content{
+	flex-grow: 3;
+	margin-right: 10px;
+}
+.content-wrapper .sidebar{
+	flex-grow: 1;
+	margin-left: 10px;
+}
 
 
 
