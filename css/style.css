@@ -1,0 +1,220 @@
+body{
+	margin: 0;
+	height: 100%;
+}
+section{
+	height: 100%;
+}
+a{
+	text-decoration: none;
+	transition: 0.4s;
+}
+input[type=submit], input[type=text]{
+	border: none;
+}
+.site{
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+header .top{
+	height: 150px;
+	background-image: url("../images/top_header.jpg");
+	background-size: cover;
+	background-position: center;
+}
+header .top .sign{
+	display: flex;
+	width: 84%;
+	margin: auto;
+	justify-content: flex-end;
+}
+header .top .sign a{
+	margin-top: 20px;
+	padding: 10px 15px;
+	color: #303030;
+}
+header .top .sign a.sign_in{
+	background-color: rgba(255,255,255,0.8);
+}
+header .top .sign a.sign_up{
+	background-color: #369b39;
+}
+header .nav{
+	padding: 0 8%;
+	background-color: #303030;
+	border-top: solid 4px #e25353;
+	border-bottom: solid 4px #e25353;
+}
+header .navbar{
+	display: flex;
+	justify-content: flex-end;
+}
+header .navbar a{
+	padding: 20px;
+	color: white;
+}
+header .navbar a:hover{
+	padding: 20px;
+	color: white;
+	background-color: #e25353;
+}
+
+.main-wrapper{
+	flex-grow: 1;
+	background-color: #e8e8e8;
+}
+.main-wrapper .main{
+	display: flex;
+	flex-direction: column;
+	width: 84%;
+	margin: 20px auto;
+}
+.main-wrapper .main .search{
+	margin-bottom: 10px;
+}
+.main-wrapper .main .search form{
+	position: relative;
+}
+.main-wrapper .main .search form input[type=text]{
+	font-size: 16px;
+	font-style: italic;
+	border: solid 1px #d1d1d1;
+	padding: 12px 20px;
+	width: 100%;
+	box-sizing: border-box;
+	transition: 0.4;
+	height: 55px;
+}
+.main-wrapper .main .search form input[type=submit]{
+	background: url("../images/search.png");
+	background-size: cover;
+	text-decoration: none;
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	right: 10px;
+	top: 10px;
+	cursor: pointer;
+}
+
+
+.main-wrapper .container{
+	display: flex;
+	margin-bottom: 10px;
+}
+.main-wrapper .container div{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.main-wrapper .container .left{
+	background-image: url("../images/kirito.jpg");
+	background-size: cover;
+	background-position: center;
+	flex: 1;
+	padding: 1rem;
+	transition: all .2s ease-in-out;
+	opacity: 0.9;
+}
+.main-wrapper .container .right{
+	background-image: url("../images/manga.jpg");
+	background-size: cover;
+	background-position: center;
+	flex: 1;
+	padding: 1rem;
+	transition: all .2s ease-in-out;
+	opacity: 0.9;
+}
+.main-wrapper .container .right:hover, .left:hover{
+	transform: scale(0.95);
+	opacity: 1;
+}
+.main-wrapper .container .left h1{
+	font-weight: bold;
+	font-size: 6rem;
+	text-shadow: 9px 8px 15px #ff334f;
+}
+.main-wrapper .container .right h1{
+	font-weight: bold;
+	font-size: 6rem;
+	text-shadow: 9px 8px 15px #335AFF;
+}
+.main-wrapper .container .button{
+	border-radius: 30px;
+	color: #fff;
+	background-color: #fcad26;
+	padding-left: 0.5%;
+	margin: 0 2%;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	display: inline-block;
+	font-size: 1.5rem;
+	cursor: pointer;
+	transition: all 0.3s;
+	width: 150px;
+}
+.container .button:hover{
+	background: #fcc567;
+	color: #fff;
+}
+
+.main-wrapper .main .news{
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+.news .updates, .news .last_news{
+	width: 49%;
+}
+.news .news-block{
+	position: relative;
+	height: 25px;
+	display: flex;
+	background-color: #303030;
+	padding: 10px;
+	color: white;
+	justify-content: center;
+	align-items: center;
+	border-bottom: solid 4px #e25353;
+}
+.news .news-block span{
+	text-align: center;
+}
+.news .news-block a{
+	position: absolute;
+	right: 10px;
+	color: white;
+	text-decoration: underline;
+}
+.news .cont{
+	height: 400px;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	border-bottom: solid 4px #e25353;
+}
+.news .cont li{
+	background-color: white;
+	list-style-type: none;
+	padding: 10px;
+	height: calc(100%/10);
+	transition: 0.4s;
+	box-sizing: border-box;
+}
+.news .cont li:hover{
+	border-left: solid 3px green;
+	transition: 0.3s;
+}
+
+
+
+
+footer{
+	color: white;
+	padding: 10px;
+	text-align: center;
+	background-color: #303030;
+}
