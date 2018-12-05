@@ -98,69 +98,6 @@ header .navbar a:hover{
 	cursor: pointer;
 }
 
-
-.main-wrapper .container{
-	display: flex;
-	margin-bottom: 10px;
-}
-.main-wrapper .container div{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
-.main-wrapper .container .left{
-	background-image: url("../images/kirito.jpg");
-	background-size: cover;
-	background-position: center;
-	flex: 1;
-	padding: 1rem;
-	transition: all .2s ease-in-out;
-	opacity: 0.9;
-}
-.main-wrapper .container .right{
-	background-image: url("../images/manga.jpg");
-	background-size: cover;
-	background-position: center;
-	flex: 1;
-	padding: 1rem;
-	transition: all .2s ease-in-out;
-	opacity: 0.9;
-}
-.main-wrapper .container .right:hover, .left:hover{
-	transform: scale(0.95);
-	opacity: 1;
-}
-.main-wrapper .container .left h1{
-	font-weight: bold;
-	font-size: 6rem;
-	text-shadow: 9px 8px 15px #ff334f;
-}
-.main-wrapper .container .right h1{
-	font-weight: bold;
-	font-size: 6rem;
-	text-shadow: 9px 8px 15px #335AFF;
-}
-.main-wrapper .container .button{
-	border-radius: 30px;
-	color: #fff;
-	background-color: #fcad26;
-	padding-left: 0.5%;
-	margin: 0 2%;
-	text-align: center;
-	text-decoration: none;
-	font-weight: bold;
-	display: inline-block;
-	font-size: 1.5rem;
-	cursor: pointer;
-	transition: all 0.3s;
-	width: 150px;
-}
-.container .button:hover{
-	background: #fcc567;
-	color: #fff;
-}
-
 .main-wrapper .main .news{
 	display: flex;
 	justify-content: space-between;

@@ -1,0 +1,74 @@
+@font-face{
+	font-family: 'Manga Temple';
+	src: url("fonts/mangat.ttf");
+}
+html,body,section{
+	height: 100%;
+	margin: 0;
+}
+body{
+	color: #fff;
+	text-align: center;
+}
+.main-wrapper{
+	height: 100vh;
+}
+.main-wrapper .container{
+	display: flex;
+	height: 100%;
+}
+.main-wrapper .container div{
+	display: flex;
+	flex-grow: 1;
+	height: 100%;
+	flex-direction: column;
+	justify-content: center;
+	padding: 1rem;
+	background-size: cover;
+	background-position: center;
+	transition: all .2s ease-in-out;
+	opacity: 0.9;
+}
+
+.main-wrapper .container .left{
+	background-image: url("../images/kirito.jpg");
+}
+.main-wrapper .container .right{
+	background-image: url("../images/shonen-jump.png");
+}
+.main-wrapper .container .right:hover, .left:hover{
+	transform: scale(0.95);
+	opacity: 1;
+}
+.main-wrapper .container .left h1{
+	font-family: 'Manga Temple';
+	font-weight: bold;
+	font-size: 6rem;
+	text-shadow: 9px 8px 15px #ff334f;
+}
+.main-wrapper .container .right h1{
+	font-family: 'Manga Temple';
+	font-weight: bold;
+	font-size: 6rem;
+	text-shadow: 9px 8px 15px #335AFF;
+}
+.main-wrapper .container .button{
+	border-radius: 30px;
+	color: #fff;
+	background-color: #fcad26;
+	padding-left: 0.5%;
+	margin: 0 2%;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
+	display: inline-block;
+	font-size: 1.5rem;
+	cursor: pointer;
+	transition: all 0.3s;
+	width: 150px;
+	font-family: 'Manga Temple';
+}
+.container .button:hover{
+	background: #fcc567;
+	color: #fff;
+}
