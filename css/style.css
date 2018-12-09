@@ -228,10 +228,61 @@ header .navbar a:hover{
 .content-wrapper .content{
 	flex-grow: 3;
 	margin-right: 10px;
+	box-sizing: border-box;
+	width: 75%;
 }
+.content-wrapper .content .latest{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+.content-wrapper .content .latest .container{
+	display: flex;
+	background-color: white;
+	margin-bottom: 10px;
+	width: 50%;
+}
+.content .latest .container img{
+	width: 180px;
+	height: 250px;
+}
+.content .latest .container .info{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+}
+.latest .container .info h3{
+	margin: 7px 10px;
+}
+.latest .container .info .rating{
+	width: 40px;
+	text-align: center;
+	margin: 2px 10px;
+	height: 20px;
+	border-radius: 5px;
+	padding: 3px;
+	color: white;
+	background-color: #f4d142;
+}
+.latest .container .info .description {
+	margin: 2px 10px; 
+}
+.latest .container .info p{
+	margin: 2px 10px;
+}
+.latest .container .info p span{
+	font-weight: bold;
+}
+.latest .container .info p .genres{
+	font-size: 12px;
+	font-weight: normal;
+}
+
+
 .content-wrapper .sidebar{
 	flex-grow: 1;
 	margin-left: 10px;
+	width: 25%;
 }
 
 
