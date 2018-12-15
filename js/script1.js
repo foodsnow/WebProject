@@ -33,3 +33,13 @@ leftButton.addEventListener("click", swipeLeft);
 rightButton.addEventListener("click", swipeRight);
 setInterval(swipeRight, 8000);
 
+
+
+function showAll(){
+	let w = event.currentTarget.parentNode.parentNode.childNodes[3];
+	console.log(w.style.display);
+	w.style.display = "block";
+	console.log(w.style.display);
+}
+
+document.querySelector(".sidebar .sidebar-content .part input").addEventListener("click", showAll);

@@ -157,13 +157,67 @@
 					</section>
 					<aside class="sidebar">
 						<div id="block"><span>Filtr</span></div>
+						<div class="sidebar-content">
+							<form action="">
+								<div class="part">
+									<label>Choose genre</label>
+									<select name="selected_genres[]" class="chosen-multi" multiple="multiple" style="display: none;">
+										<option>Action</option>
+										<option>Drama</option>
+										<option>Comedy</option>
+										<option>Mystery</option>
+									</select>
+									
+									<div style="position: relative"><input type="text" name=""></div>
+								</div>
+								<div class="part">
+									<label>Type of anime</label>
+									<select name="selected_types[]" class="chosen-multi" multiple="multiple">
+										<option>Film</option>
+										<option>Series</option>
+									</select>
+									<input type="text" name="" style="position: relative;">
+								</div>
+								<div class="part">
+									<label>Status</label>
+									<select name="selected_status" class="chosen-single">
+										<option selected="selected">Do not count</option>
+										<option>Ongoing</option>
+										<option>Ended</option>
+										<option>Anons</option>
+									</select>
+								</div>
+								<div class="part">
+									<label>Year</label>
+									<div>
+										<input type="number" name="begin_year" placeholder="from">
+										<input type="number" name="end_year" placeholder="till">
+									</div>
+								</div>
+								<div class="part">
+									<label>Sort by</label>
+									<select name="selected_sort" class="chosen-single">
+										<option selected="selected">Rating</option>
+										<option>from A to Z</option>
+										<option>from Z to A</option>
+										<option>Date(new at first)</option>
+										<option>Date(old at first)</option>
+									</select>
+								</div>
+								<div class="submit-place">
+									<input type="submit" name="Submit" value="Submit">
+								</div>
+							</form>
+						</div>
 					</aside>
 				</div>
 			</div>
 		</div>
 		<footer>
-			This is footer<br>
-			Aytkazin Askar, Khamit Askar, Sundet
+			<div class="footer_container">
+				<p>This is footer</p>
+				<p>Aytkazin Askar, Khamit Askar, Sundet</p>
+			</div>
 		</footer>
 	</div>
 </body>
