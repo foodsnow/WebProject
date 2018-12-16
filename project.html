@@ -10,8 +10,15 @@
 		<header>
 			<div class="top">
 				<div class="sign">
-					<a class="sign_in" href="">Sign in</a>
+					<span class="sign_in" href="">Sign in</span>
 					<a class="sign_up" href="">Sign Up</a>
+				</div>
+				<div id="clearfix">
+					<form action="" style="display: none">
+							<input type="text" name="nickname" placeholder="Nickname">
+							<input type="password" name="password" placeholder="Password">
+							<input type="submit" value="Sign in">
+					</form>
 				</div>
 			</div>
 			<div class="nav">
@@ -88,7 +95,13 @@
 							<a href="">All updates</a>
 						</div>
 						<ul class="cont">
-							<li>Goblin Slayer</li>
+							<li>
+								<a href="">
+									<span class="date">15 Dec</span>
+									<img src="images/krolik.jpg">
+									<span class="main-info">Lorem ipsum news</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 					<div class="last_news">
@@ -97,7 +110,13 @@
 							<a href="">All news</a>
 						</div>
 						<ul class="cont">
-							<li>ZombieLand: Saga</li>
+							<li>
+								<a href="">
+									<span class="date">15 Dec</span>
+									<img src="">
+									<span class="main-info">Lorem ipsum news</span>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</section>
@@ -161,22 +180,24 @@
 							<form action="">
 								<div class="part">
 									<label>Choose genre</label>
-									<select name="selected_genres[]" class="chosen-multi" multiple="multiple" style="display: none;">
-										<option>Action</option>
-										<option>Drama</option>
-										<option>Comedy</option>
-										<option>Mystery</option>
-									</select>
+									<div class="allselected"></div>
+									<input type="text" name="">
+									<section><select name="selected_genres[]" class="chosen-multi genre" multiple="multiple" data-placeholder="Choose genres" size="5">
+											<option value="1">Action</option>
+											<option value="2">Drama</option>
+											<option value="3">Comedy</option>
+											<option value="4">Paranormal mystery</option>
+									</select></section>
 									
-									<div style="position: relative"><input type="text" name=""></div>
 								</div>
 								<div class="part">
 									<label>Type of anime</label>
-									<select name="selected_types[]" class="chosen-multi" multiple="multiple">
-										<option>Film</option>
-										<option>Series</option>
-									</select>
-									<input type="text" name="" style="position: relative;">
+									<div class="allselected"></div>
+									<input type="text" name="">
+									<section><select name="selected_types[]" class="chosen-multi type" multiple="multiple" data-placeholder="Choose type of anime" size="2">
+											<option>Film</option>
+											<option>Series</option>
+									</select></section>
 								</div>
 								<div class="part">
 									<label>Status</label>
@@ -189,7 +210,7 @@
 								</div>
 								<div class="part">
 									<label>Year</label>
-									<div>
+									<div class="forYear">
 										<input type="number" name="begin_year" placeholder="from">
 										<input type="number" name="end_year" placeholder="till">
 									</div>

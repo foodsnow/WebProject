@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/script2.js" defer></script>
+</head>
+<body>
+	<div class="site">
+		<header>
+			<div class="top">
+				<div class="sign">
+					<span class="sign_in" href="">Sign in</span>
+					<a class="sign_up" href="">Sign Up</a>
+				</div>
+				<div id="clearfix">
+					<form action="" style="display: none">
+							<input type="text" name="nickname" placeholder="Nickname">
+							<input type="password" name="password" placeholder="Password">
+							<input type="submit" value="Sign in">
+					</form>
+				</div>
+			</div>
+			<div class="nav">
+				<nav class="navbar">
+					<a href="">Home</a>
+					<a href="">News</a>
+					<a href="">Catalog</a>
+					<a href="">Top-100</a>
+					<a href="">Random</a>
+					<a href="">Community</a>
+					<a href="">Help</a>
+				</nav>
+			</div>
+		</header>
+		<div class="cinema-overlay"></div>
+		<div class="main-wrapper">
+			<div class="main">
+				<div class="content-wrapper">
+					<section class="content">
+						<section class="item">
+							<div class="poster">
+								<img src="images/sword.png">
+							</div>
+							<h1>Sword art online</h1>
+							<div class="description">
+								<ul class="info">
+									<li>
+										<span>Year:</span>
+										<div class="year">2018</div>
+									</li>
+									<li>
+										<span>Genre:</span>
+										<ul class="genres">
+											<li>Action</li>
+											<li>Drama</li>
+										</ul>
+									</li>
+									<li>
+										<span>Type:</span>
+										<ul class="types">
+											<li>Serial</li>
+										</ul>
+									</li>
+									<li>
+										<span>Number of series:</span>
+										<div class="num-of-series"></div>
+									</li>
+									<li class="basic-info">
+										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Faucibus turpis in eu mi bibendum neque. Integer vitae justo eget magna fermentum. Duis at tellus at urna condimentum mattis pellentesque. Iaculis eu non diam phasellus vestibulum lorem sed risus. Sodales ut etiam sit amet. Nunc id cursus metus aliquam eleifend mi in nulla. Tellus id interdum velit laoreet id donec. Diam sit amet nisl suscipit adipiscing. Imperdiet sed euismod nisi porta lorem mollis aliquam ut. Lobortis mattis aliquam faucibus purus in massa tempor. Tristique nulla aliquet enim tortor at auctor urna nunc id.</p>
+									</li>
+								</ul>
+							</div>
+							<div class="video">
+								<div id="block">
+									<span>VIDEO</span>
+								</div>
+								<section class="video-content">
+									<div class="episodes">
+										<div data-src="https://hdgo.cx/video/t/WNT1cE15D2opUof0svC1UAXi8ewlzWuD/756459/?origin=yummyanime.com" class="video-button">1</div>
+										<div data-src="https://hdgo.cx/video/t/WNT1cE15D2opUof0svC1UAXi8ewlzWuD/752679/?origin=yummyanime.com">2</div>
+										<div data-src="https://hdgo.cx/video/t/WNT1cE15D2opUof0svC1UAXi8ewlzWuD/758791/?origin=yummyanime.com" class="video-button">3</div>
+									</div>
+									<div class="video-player">
+										<iframe src="https://hdgo.cx/video/t/WNT1cE15D2opUof0svC1UAXi8ewlzWuD/756459/?origin=yummyanime.com"></iframe>
+									</div>
+									<button>Light</button>
+								</section>
+								<div id="block"></div>
+							</div>
+						</section>
+					</section>
+					<aside class="sidebar">
+						<div id="block"><span>Filtr</span></div>
+						<div class="sidebar-content">
+							<form action="">
+								<div class="part">
+									<label>Choose genre</label>
+									<div class="allselected"></div>
+									<input type="text" name="">
+									<section><select name="selected_genres[]" class="chosen-multi genre" multiple="multiple" data-placeholder="Choose genres" size="5">
+											<option value="1">Action</option>
+											<option value="2">Drama</option>
+											<option value="3">Comedy</option>
+											<option value="4">Paranormal mystery</option>
+									</select></section>
+								</div>
+								<div class="part">
+									<label>Type of anime</label>
+									<div class="allselected"></div>
+									<input type="text" name="">
+									<section><select name="selected_types[]" class="chosen-multi type" multiple="multiple" data-placeholder="Choose type of anime" size="2">
+											<option>Film</option>
+											<option>Series</option>
+									</select></section>
+								</div>
+								<div class="part">
+									<label>Status</label>
+									<select name="selected_status" class="chosen-single">
+										<option selected="selected">Do not count</option>
+										<option>Ongoing</option>
+										<option>Ended</option>
+										<option>Anons</option>
+									</select>
+								</div>
+								<div class="part">
+									<label>Year</label>
+									<div class="forYear">
+										<input type="number" name="begin_year" placeholder="from">
+										<input type="number" name="end_year" placeholder="till">
+									</div>
+								</div>
+								<div class="part">
+									<label>Sort by</label>
+									<select name="selected_sort" class="chosen-single">
+										<option selected="selected">Rating</option>
+										<option>from A to Z</option>
+										<option>from Z to A</option>
+										<option>Date(new at first)</option>
+										<option>Date(old at first)</option>
+									</select>
+								</div>
+								<div class="submit-place">
+									<input type="submit" name="Submit" value="Submit">
+								</div>
+							</form>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="footer_container">
+				<p>This is footer</p>
+				<p>Aytkazin Askar, Khamit Askar, Sundet</p>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

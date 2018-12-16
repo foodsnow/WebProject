@@ -1,50 +1,3 @@
-function sign(){
-	let sign_form = document.querySelector("header .top form");
-	if (sign_form.style.display === "none") {
-		sign_form.style.display = "block";
-	}else{
-		sign_form.style.display = "none";
-	}
-}
-document.querySelector("header .top .sign span").addEventListener("click", sign);
-
-
-let slides = document.querySelector(".main-wrapper .main .slider ul");
-let slide = document.querySelectorAll(".slider ul li");
-let len = slide.length;
-
-let leftButton = document.querySelector(".main-wrapper .main .slider button#left");
-let rightButton = document.querySelector(".main-wrapper .main .slider button#right");
-
-let trans = 0;
-let current = 0;
-
-function swipeRight(){
-	if (current + 7 >= len) {
-		trans = 0;
-		current = 0;
-	}else{
-		trans += slide[0].offsetWidth;
-		current += 1;
-	}
-	slides.style.transform = "translateX(" + -trans + "px)";
-}
-function swipeLeft(){
-	if (current <= 0) {
-		trans = slide[0].offsetWidth * (len - 7);
-		current = len - 7;
-	}else{
-		trans -= slide[0].offsetWidth;
-		current -= 1;
-	}
-	slides.style.transform = "translateX(" + -trans + "px)";
-}
-
-leftButton.addEventListener("click", swipeLeft);
-rightButton.addEventListener("click", swipeRight);
-setInterval(swipeRight, 8000);
-
-
 let all = document.querySelectorAll(".sidebar .sidebar-content .part input[type=text]");
 let allSelect = document.querySelectorAll(".sidebar .sidebar-content .part .chosen-multi");
 let arr_genre = [];
@@ -109,3 +62,31 @@ function initSelect(){
 	}
 }
 initSelect();
+
+
+function changeEpisode(){
+	let selected = document.querySelector(".item .video .episodes .selected");
+	if (selected) {
+		selected.classList.remove("selected");
+	}
+	event.currentTarget.classList.add("selected");
+	let player = document.querySelector("iframe");
+	console.log(player);
+	player.src = event.currentTarget.dataset.src;
+}
+
+let episodes = document.querySelectorAll(".item .video .episodes div");
+for(let div of episodes){
+	div.addEventListener("click", changeEpisode);
+}
+
+function lightOff(){
+	event.currentTarget.style.display = "none";
+	event.currentTarget.removeEventListenet("click", lightOff);
+} 
+function lightOn(){
+	let overlay = document.querySelector(".cinema-overlay");
+	overlay.style.display = "block";
+	overlay.addEventListener("click", lightOff);
+}
+document.querySelector(".item .video .video-content button").addEventListener("click", lightOn);
