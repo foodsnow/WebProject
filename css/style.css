@@ -50,6 +50,7 @@ header .top{
 	background-image: url("../images/top_header.jpg");
 	background-size: cover;
 	background-position: center;
+	background-color: #303030;
 }
 #clearfix{
 	position: relative;
@@ -109,6 +110,21 @@ header .top .sign a.sign_up{
 	color: white;
 	background-color: #369b39;
 }
+header .mobile-menu{
+	height: 25px;
+	display: none;
+	background-color: #303030;
+	justify-content: center;
+	align-items: center;
+	transition: 0.4s;
+	border-top: solid 4px #e25353;
+	padding: 20px;
+	color: white;
+}
+header .mobile-menu:hover{
+	background-color: #369b39;
+
+}
 header .nav{
 	padding: 0 8%;
 	background-color: #303030;
@@ -117,9 +133,11 @@ header .nav{
 }
 header .navbar{
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: flex-end;
 }
 header .navbar a{
+	text-align: center;
 	padding: 20px;
 	color: white;
 }
@@ -374,6 +392,7 @@ header .navbar a:hover{
 .content .item .description .info{
 	display: flex;
 	flex-direction: column;
+	min-height: 220px;
 }
 .content .item .description .info li{
 	display: flex;
@@ -392,7 +411,7 @@ header .navbar a:hover{
 .item .description .info li div{
 	margin: 0 3px;
 }
-.description .info li .basic-info{
+.description .basic-info{
 	padding: 10px 0;
 }
 .item .video{
@@ -552,3 +571,80 @@ footer .footer_container p{
 	color: white;
 }
 /*INTERFACE*/
+
+@media(max-width: 1200px){
+	.main-wrapper .main{
+		margin: 20px 5px;
+		width: 99%;
+	}
+	header .nav{
+		padding: 0;
+	}
+	header .navbar{
+		margin-right: 10px;
+	}
+	header .top .sign{
+		width: 99%;
+	}
+	footer .footer_container{
+		width: 99%;
+	}
+}
+@media(max-width: 1022px){
+	.main .content-wrapper aside{
+		display: none;
+	}
+	.main .content-wrapper .content{
+		width: 99%;
+		margin: auto;
+	}
+	header .navbar{
+		justify-content: center;
+		margin: 0;
+	}
+	header .navbar a{
+		flex-grow: 1;
+	}
+	header .top{
+		background-image: none;
+		height: auto;
+	}
+	header .top .sign{
+		justify-content: center;
+		align-items: center;
+	}
+	header .top .sign a, .top .sign span{
+		margin: 10px 0;
+	}
+}
+@media(max-width: 900px){
+	.item .video .video-player iframe{
+		height: 360px;
+	}
+}
+@media(max-width: 780px){
+	header .mobile-menu{
+		display: flex;
+	}
+	header .nav{
+		border-top: none;
+	}
+	header .navbar a{
+		box-sizing: border-box;
+		border-top: solid 1px #e25353;
+		border-bottom: solid 1px #e25353;
+		width: 50%;
+	}
+}
+@media(max-width: 480px){
+	.content .item .poster{
+		float: none;
+		width: 100%;
+		height: auto;
+		margin: 0;
+		padding: 0;
+	}
+	.content .item .description .info{
+		min-height: 0;
+	}
+}

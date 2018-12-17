@@ -82,7 +82,7 @@ for(let div of episodes){
 
 function lightOff(){
 	event.currentTarget.style.display = "none";
-	event.currentTarget.removeEventListenet("click", lightOff);
+	event.currentTarget.removeEventListener("click", lightOff);
 } 
 function lightOn(){
 	let overlay = document.querySelector(".cinema-overlay");
