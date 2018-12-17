@@ -50,6 +50,58 @@ let allSelect = document.querySelectorAll(".sidebar .sidebar-content .part .chos
 let arr_genre = [];
 let arr_type = [];
 
+function onReady(json){
+	const updates = json.updates;
+	let updates_section = document.querySelector(".main-wrapper .main .news .updates .cont");
+	while(updates_section.firstChild){
+		updates_section.removeChild(updates_section.firstChild);
+	}
+	for(let i = 0; i < 10; i++){
+		let li = document.createElement("li");
+		let a = document.createElement("a");
+		let date = document.createElement("span");
+		date.classList.add("date");
+		date.textContent =updates[i]["date"];
+		a.appendChild(date);
+		let img = document.createElement("img");
+		img.src = updates[i]["img"];
+		a.appendChild(img);
+		let info = document.createElement("span");
+		info.textContent = updates[i]["name"] + " - Added " + updates[i]["episode"] + " episode with " 
+						+ updates[i]["desc"] + " translation";
+		info.classList.add("main-info");
+		a.appendChild(info);
+		li.appendChild(a);
+		updates_section.appendChild(li);
+	}
+	const news = json.news;
+	let news_section = document.querySelector(".main-wrapper .main .news .last_news .cont");
+	while(news_section.firstChild){
+		news_section.removeChild(news_section.firstChild);
+	}
+	for(let i = 0; i < 10; i++){
+		let li = document.createElement("li");
+		let a = document.createElement("a");
+		let date = document.createElement("span");
+		date.classList.add("date");
+		date.textContent = news[i]["date"];
+		a.appendChild(date);
+		let info = document.createElement("span");
+		info.textContent = news[i]["desc"];
+		info.classList.add("main-info");
+		a.appendChild(info);
+		li.appendChild(a);
+		news_section.appendChild(li);
+	}
+}
+function onResponse(response){
+	console.log("Connot load")
+	return response.json();
+}
+function onError(){
+	console.log("error");
+}
+fetch("https://demo3476894.mockable.io/dlyafetcha").then(onResponse, onError).then(onReady);
 
 function ShowOrHide(){
 	let w = event.currentTarget.parentNode.childNodes[7].childNodes[0];

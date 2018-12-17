@@ -255,6 +255,7 @@ header .navbar a:hover{
 
 .main-wrapper .main .news{
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	margin-bottom: 10px;
 }
@@ -271,7 +272,6 @@ header .navbar a:hover{
 	height: 500px;
 	margin: 0;
 	padding: 0;
-	border-bottom: solid 4px #e25353;
 	overflow: hidden;
 }
 .news .cont li{
@@ -280,6 +280,7 @@ header .navbar a:hover{
 	transition: 0.4s;
 	overflow: hidden;
 	border-bottom: solid 1px #b7b7b7;
+	box-sizing: border-box;
 }
 .news .cont li:hover{
 	border-left: solid 3px green;
@@ -294,6 +295,7 @@ header .navbar a:hover{
 	width: 60px;
 	text-align: center;
 	padding: 10px 0;
+	border-right: solid 1px #636363;
 }
 .news .cont li a img{
 	width: 40px;
@@ -392,7 +394,6 @@ header .navbar a:hover{
 .content .item .description .info{
 	display: flex;
 	flex-direction: column;
-	min-height: 220px;
 }
 .content .item .description .info li{
 	display: flex;
@@ -424,7 +425,6 @@ header .navbar a:hover{
 }
 .item .video .video-content{
 	z-index: 201;
-	position: relative;
 }
 .item .video .episodes div{
 	display: inline-block;
@@ -475,6 +475,86 @@ header .navbar a:hover{
 	display: none;
 }
 /*ITEM PAGE END*/
+/*TOP PAGE BEGIN*/
+.top-container{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.anime-column { 
+	width: 230px; 
+	display: inline-block; 
+	vertical-align: top; 
+	margin: 10px 0; 
+	padding: 0 5px; 
+	text-align: center; 
+	position: relative; 
+	border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.anime-column a { 
+	font-weight: 600; 
+	text-transform: uppercase; 
+	position: relative; 
+	display: block; 
+	color: #333; 
+}
+
+.year-block { 
+	position: absolute; 
+	color: #333; 
+	font-weight: 400; 
+	right: 0; 
+	padding: 2px 10px; 
+	background: #e2e2e2; 
+}
+ 
+.preview-info-block { 
+	padding: 10px 10px 0 0; 
+	max-height: 240px; 
+	overflow: auto;
+	margin: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box; 
+}
+ 
+.anime-title{
+	padding-right: 5px;
+	margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+ 
+.anime-column .rating-info { 
+	font-size: 12px; 
+	margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+} 
+
+.rating-info { 
+	margin-bottom: 10px; 
+	position: relative;
+
+}
+
+.main-rating, .main-rating-info { 
+	vertical-align: middle; 
+	font-size: 12px; 
+	margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+}
+/*TOP PAGE END*/
 /*INTERFACE*/
 .content-wrapper .sidebar{
 	flex-grow: 1;
@@ -571,17 +651,10 @@ footer .footer_container p{
 	color: white;
 }
 /*INTERFACE*/
-
-@media(max-width: 1200px){
+@media(max-width: 1325px){
 	.main-wrapper .main{
 		margin: 20px 5px;
 		width: 99%;
-	}
-	header .nav{
-		padding: 0;
-	}
-	header .navbar{
-		margin-right: 10px;
 	}
 	header .top .sign{
 		width: 99%;
@@ -590,14 +663,18 @@ footer .footer_container p{
 		width: 99%;
 	}
 }
+@media(max-width: 1200px){
+	header .nav{
+		padding: 0;
+	}
+	header .navbar{
+		margin-right: 10px;
+	}
+	.content-wrapper .content .latest .container{
+		width: 100%;
+	}
+
 @media(max-width: 1022px){
-	.main .content-wrapper aside{
-		display: none;
-	}
-	.main .content-wrapper .content{
-		width: 99%;
-		margin: auto;
-	}
 	header .navbar{
 		justify-content: center;
 		margin: 0;
@@ -616,10 +693,26 @@ footer .footer_container p{
 	header .top .sign a, .top .sign span{
 		margin: 10px 0;
 	}
+	.main .content-wrapper aside{
+		display: none;
+	}
+	.main .content-wrapper .content{
+		width: 99%;
+		margin: auto;
+	}
+	.news .updates, .news .last_news{
+		width: 100%;
+	}
 }
 @media(max-width: 900px){
 	.item .video .video-player iframe{
 		height: 360px;
+	}
+	.main-wrapper .main .slider-container{
+		display: none;
+	}
+	.news .cont li a img{
+		display: none;
 	}
 }
 @media(max-width: 780px){

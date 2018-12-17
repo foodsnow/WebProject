@@ -1,3 +1,13 @@
+function sign(){
+	let sign_form = document.querySelector("header .top form");
+	if (sign_form.style.display === "none") {
+		sign_form.style.display = "block";
+	}else{
+		sign_form.style.display = "none";
+	}
+}
+document.querySelector("header .top .sign span").addEventListener("click", sign);
+
 let all = document.querySelectorAll(".sidebar .sidebar-content .part input[type=text]");
 let allSelect = document.querySelectorAll(".sidebar .sidebar-content .part .chosen-multi");
 let arr_genre = [];
