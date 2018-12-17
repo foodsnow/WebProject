@@ -20,7 +20,14 @@ let trans = 0;
 let current = 0;
 
 function swipeRight(){
-	if (current + 7 >= len) {
+	if (window.innerWidth <= 1128) {
+		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "6";
+	}
+	if (window.innerWidth <= 942) {
+		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "5";
+	}
+	let capacity = parseInt(document.querySelector(".main-wrapper .main .slider").dataset.capacity);
+	if (current + capacity >= len) {
 		trans = 0;
 		current = 0;
 	}else{
@@ -30,16 +37,23 @@ function swipeRight(){
 	slides.style.transform = "translateX(" + -trans + "px)";
 }
 function swipeLeft(){
+	if (window.innerWidth <= 1128) {
+		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "6";
+	}
+	if (window.innerWidth <= 942) {
+		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "5";
+	}
+	let capacity = parseInt(document.querySelector(".main-wrapper .main .slider").dataset.capacity);
 	if (current <= 0) {
-		trans = slide[0].offsetWidth * (len - 7);
-		current = len - 7;
+		trans = slide[0].offsetWidth * (len - capacity);
+		current = len - capacity;
 	}else{
 		trans -= slide[0].offsetWidth;
 		current -= 1;
 	}
 	slides.style.transform = "translateX(" + -trans + "px)";
 }
-
+console.log("asdasdas");
 leftButton.addEventListener("click", swipeLeft);
 rightButton.addEventListener("click", swipeRight);
 setInterval(swipeRight, 8000);

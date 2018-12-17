@@ -1,3 +1,32 @@
+<?php
+$con = mysqli_connect("localhost", "root", "", "anime");
+if (!$con) {
+	die("Could not connect");
+}
+$id = 5;
+$username = "";
+$password = "";
+if (isset($_COOKIE["username"]) && isset($_COOKIE["password"])) {
+	$username = $_COOKIE["username"];
+	$password = $_COOKIE["password"];
+}
+if (isset($_REQUEST["username"]) && isset($_REQUEST["password"])) {
+	$username = $_REQUEST["username"];
+	$password = $_REQUEST["password"];
+	setcookie("username", $username);
+	setcookie("password", $password);
+}
+$sql_user = "SELECT 1 FROM `users` WHERE `username`='$username' AND `password`='$password';";
+$users = mysqli_query($con, $sql_user);
+$num = mysqli_fetch_assoc($users);
+
+if (isset($_REQUEST["id"])) {
+	$id = $_REQUEST["id"];
+}
+$sql = "SELECT * FROM `anime-list` WHERE `id`=$id;";
+$result = mysqli_query($con, $sql);
+$inf = mysqli_fetch_assoc($result);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +40,19 @@
 		<header>
 			<div class="top">
 				<div class="sign">
-					<span class="sign_in" href="">Sign in</span>
-					<a class="sign_up" href="">Sign Up</a>
+				<?php
+				if ($num == false) {
+				?>
+				<span class="sign_in">Sign in</span>
+				<a class="sign_up" href="register.html">Sign Up</a>
+				<?php
+				}else{
+				?>
+				<span class="nick"><?=$username?></span>
+				<form><input class="exit" type="submit" value="Exit"></form>
+				<?php
+				}
+				?>
 				</div>
 				<div id="clearfix">
 					<form action="" style="display: none">
@@ -41,31 +81,37 @@
 					<section class="content">
 						<section class="item">
 							<div class="poster">
-								<img src="images/sword.png">
+								<img src=<?=$inf["image"]?>>
 							</div>
-							<h1>Sword art online</h1>
+							<div class="title">
+								<h1><?=$inf["name"]?></h1>
+								<span><?=$inf["rating"]?>/10(<?=$inf["votes"]?> votes)</span>
+							</div>
 							<div class="description">
 								<ul class="info">
 									<li>
+										<span>Views:</span>
+										<div class="views"><?=$inf["views"]?></div>
+									</li>
+									<li>
 										<span>Year:</span>
-										<div class="year">2018</div>
+										<div class="year"><?=$inf["year"]?></div>
 									</li>
 									<li>
 										<span>Genre:</span>
 										<ul class="genres">
-											<li>Action</li>
-											<li>Drama</li>
+											<li><?=$inf["genre"]?></li>
 										</ul>
 									</li>
 									<li>
 										<span>Type:</span>
 										<ul class="types">
-											<li>Serial</li>
+											<li><?=$inf["type"]?></li>
 										</ul>
 									</li>
 									<li>
-										<span>Number of series:</span>
-										<div class="num-of-series"></div>
+										<span>Number of episodes:</span>
+										<div class="num-of-series"><?=$inf["episodes"]?></div>
 									</li>
 								</ul>
 								<div class="basic-info">
@@ -78,9 +124,13 @@
 								</div>
 								<section class="video-content">
 									<div class="episodes">
-										<div data-src="https://hdgo.cx/video/t/WNT1cE15D2opUof0svC1UAXi8ewlzWuD/756459/?origin=yummyanime.com" class="video-button">1</div>
-										<div data-src="https://hdgo.cx/video/t/WNT1cE15D2opUof0svC1UAXi8ewlzWuD/752679/?origin=yummyanime.com">2</div>
-										<div data-src="https://hdgo.cx/video/t/WNT1cE15D2opUof0svC1UAXi8ewlzWuD/758791/?origin=yummyanime.com" class="video-button">3</div>
+										<?php
+										for ($i=1; $i <= (int)$inf["episodes"]; $i++) { 
+											?>
+											<div data-src="https://hdgo.cx/video/t/WNT1cE15D2opUof0svC1UAXi8ewlzWuD/756459/?origin=yummyanime.com" class="video-button"><?=$i?></div>
+											<?php
+										}
+										?>
 									</div>
 									<div class="video-player">
 										<iframe src="https://hdgo.cx/video/t/WNT1cE15D2opUof0svC1UAXi8ewlzWuD/756459/?origin=yummyanime.com"></iframe>
@@ -94,25 +144,46 @@
 					<aside class="sidebar">
 						<div id="block"><span>Filtr</span></div>
 						<div class="sidebar-content">
-							<form action="">
+							<form action="catalog.html">
 								<div class="part">
 									<label>Choose genre</label>
 									<div class="allselected"></div>
 									<input type="text" name="">
+									<?php 
+									$sql_genre = "SELECT DISTINCT `genre` FROM `anime-list` WHERE 1;";
+									$genres = mysqli_query($con, $sql_genre);
+									$num_of_genres = mysqli_num_rows($genres);
+									?>
 									<section><select name="selected_genres[]" class="chosen-multi genre" multiple="multiple" data-placeholder="Choose genres" size="5">
-											<option value="1">Action</option>
-											<option value="2">Drama</option>
-											<option value="3">Comedy</option>
-											<option value="4">Paranormal mystery</option>
+										<?php 
+										for ($i=0; $i < $num_of_genres; $i++) { 
+											$genre = mysqli_fetch_assoc($genres);
+											?>
+											<option value=<?=$genre["genre"]?>><?=$genre["genre"]?></option>
+											<?php
+										}
+										?>
 									</select></section>
+									
 								</div>
 								<div class="part">
 									<label>Type of anime</label>
 									<div class="allselected"></div>
 									<input type="text" name="">
+									<?php 
+									$sql_type = "SELECT DISTINCT `type` FROM `anime-list` WHERE 1;";
+									$types = mysqli_query($con, $sql_type);
+									$num_of_types = mysqli_num_rows($types);
+									?>
 									<section><select name="selected_types[]" class="chosen-multi type" multiple="multiple" data-placeholder="Choose type of anime" size="2">
-											<option>Film</option>
-											<option>Series</option>
+										<?php 
+										for ($i=0; $i < $num_of_types; $i++) { 
+											$type = mysqli_fetch_assoc($types);
+											?>
+											<option value=<?=$type["type"]?>><?=$type["type"]?></option>
+											<?php
+										}
+										?>
 									</select></section>
 								</div>
 								<div class="part">
@@ -137,8 +208,6 @@
 										<option selected="selected">Rating</option>
 										<option>from A to Z</option>
 										<option>from Z to A</option>
-										<option>Date(new at first)</option>
-										<option>Date(old at first)</option>
 									</select>
 								</div>
 								<div class="submit-place">

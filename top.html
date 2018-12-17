@@ -1,0 +1,173 @@
+<?php 
+$host = "localhost";
+$username = "root";
+$password = "";
+$db = "anime";
+
+$con = mysqli_connect($host,$username,$password,$db);
+$connection_error = mysqli_connect_error();
+if($connection_error != null){
+	echo "Error";
+}
+
+$query = "SELECT * FROM `anime-list` WHERE `type` = 'serial'";
+$result = mysqli_query($con,$query);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Top anime</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/script3.js" defer></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="site">
+		<header>
+			<div class="top">
+				<div class="sign">
+					<span class="sign_in">Sign in</span>
+					<a class="sign_up" href="register.html">Sign Up</a>
+				</div>
+				<div id="clearfix">
+					<form action="" style="display: none">
+							<input type="text" name="nickname" placeholder="Nickname">
+							<input type="password" name="password" placeholder="Password">
+							<input type="submit" value="Sign in">
+					</form>
+				</div>
+			</div>
+			<div class="nav">
+				<nav class="navbar">
+					<a href="">Home</a>
+					<a href="">News</a>
+					<a href="">Catalog</a>
+					<a href="">Top-100</a>
+					<a href="">Community</a>
+					<a href="">Help</a>
+				</nav>
+			</div>
+		</header>
+		<div class="main-wrapper">
+			<div class="main">
+				<div class="search">
+					<form action="catalog.html"> 
+						<input type="text" name="search" placeholder="Search anime by name">
+						<input type="submit" name="" value="">
+					</form>
+				</div>
+				<div class="content-wrapper">
+					<section class="content">
+						<div id="block"><span>Top Anime</span>
+						<a href="top.html">Top Series</a>
+						<a href="topfilm.html">Top Films</a></div>
+						<div class="top-container">
+						<?php if(mysqli_num_rows($result)>0){
+								while($row = mysqli_fetch_assoc($result)){
+									echo '<div class="anime-column">';
+									echo '<a class="image-block" href="'.$row["link"].'">';
+									echo '<span class="year-block">'.$row["year"].'</span>';
+									echo '<img src="'.$row["image"].'" width="220" height="310"/>';
+									echo '</a>';
+									echo '<div class="preview-info-block">';
+									echo '<a class="anime-title" href="'.$row["link"].'">'.$row["name"].'</a>';
+									echo '<p>Views: '.$row["views"].'</p>';
+									echo '<div class="rating-info" title="'.$row["name"].'">';
+									
+									echo '<span class="main-rating-block">';
+									echo '<span class="main-rating">'.$row["rating"].'</span>';
+									echo '<span class="main-rating-info">('.$row["votes"].' votes)</span>';
+									echo '</span>';
+									echo '</div></div></div>';
+									
+								}}
+						?>
+						</div>
+					</section>
+				<aside class="sidebar">
+						<div id="block"><span>Filtr</span></div>
+						<div class="sidebar-content">
+							<form action="catalog.html">
+								<div class="part">
+									<label>Choose genre</label>
+									<div class="allselected"></div>
+									<input type="text" name="">
+									<?php 
+									$sql_genre = "SELECT DISTINCT `genre` FROM `anime-list` WHERE 1;";
+									$genres = mysqli_query($con, $sql_genre);
+									$num_of_genres = mysqli_num_rows($genres);
+									?>
+									<section><select name="selected_genres[]" class="chosen-multi genre" multiple="multiple" data-placeholder="Choose genres" size="5">
+										<?php 
+										for ($i=0; $i < $num_of_genres; $i++) { 
+											$genre = mysqli_fetch_assoc($genres);
+											?>
+											<option value=<?=$genre["genre"]?>><?=$genre["genre"]?></option>
+											<?php
+										}
+										?>
+									</select></section>
+									
+								</div>
+								<div class="part">
+									<label>Type of anime</label>
+									<div class="allselected"></div>
+									<input type="text" name="">
+									<?php 
+									$sql_type = "SELECT DISTINCT `type` FROM `anime-list` WHERE 1;";
+									$types = mysqli_query($con, $sql_type);
+									$num_of_types = mysqli_num_rows($types);
+									?>
+									<section><select name="selected_types[]" class="chosen-multi type" multiple="multiple" data-placeholder="Choose type of anime" size="2">
+										<?php 
+										for ($i=0; $i < $num_of_types; $i++) { 
+											$type = mysqli_fetch_assoc($types);
+											?>
+											<option value=<?=$type["type"]?>><?=$type["type"]?></option>
+											<?php
+										}
+										?>
+									</select></section>
+								</div>
+								<div class="part">
+									<label>Status</label>
+									<select name="selected_status" class="chosen-single">
+										<option selected="selected">Do not count</option>
+										<option>Ongoing</option>
+										<option>Ended</option>
+										<option>Anons</option>
+									</select>
+								</div>
+								<div class="part">
+									<label>Year</label>
+									<div class="forYear">
+										<input type="number" name="begin_year" placeholder="from">
+										<input type="number" name="end_year" placeholder="till">
+									</div>
+								</div>
+								<div class="part">
+									<label>Sort by</label>
+									<select name="selected_sort" class="chosen-single">
+										<option selected="selected">Rating</option>
+										<option>from A to Z</option>
+										<option>from Z to A</option>
+									</select>
+								</div>
+								<div class="submit-place">
+									<input type="submit" name="Submit" value="Submit">
+								</div>
+							</form>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="footer_container">
+				<p>This is footer</p>
+				<p>Aytkazin Askar, Khamit Askar, Sundet</p>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

@@ -1,3 +1,28 @@
+<?php
+$con = mysqli_connect("localhost", "root", "", "anime");
+if (!$con) {
+	die("Could not connect");
+}
+$username = "";
+$password = "";
+if (isset($_COOKIE["username"]) && isset($_COOKIE["password"])) {
+	$username = $_COOKIE["username"];
+	$password = $_COOKIE["password"];
+}
+if (isset($_REQUEST["username"]) && isset($_REQUEST["password"])) {
+	$username = $_REQUEST["username"];
+	$password = $_REQUEST["password"];
+	setcookie("username", $username);
+	setcookie("password", $password);
+}
+$sql_user = "SELECT 1 FROM `users` WHERE `username`='$username' AND `password`='$password';";
+$users = mysqli_query($con, $sql_user);
+$num = mysqli_fetch_assoc($users);
+
+
+$sql = "SELECT * FROM `anime-list`;";
+$result = mysqli_query($con, $sql);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +36,19 @@
 		<header>
 			<div class="top">
 				<div class="sign">
-					<span class="sign_in" href="">Sign in</span>
-					<a class="sign_up" href="">Sign Up</a>
+				<?php
+				if ($num == false) {
+				?>
+				<span class="sign_in">Sign in</span>
+				<a class="sign_up" href="register.html">Sign Up</a>
+				<?php
+				}else{
+				?>
+				<span class="nick"><?=$username?></span>
+				<form><input class="exit" type="submit" value="Exit"></form>
+				<?php
+				}
+				?>
 				</div>
 				<div id="clearfix">
 					<form action="" style="display: none">
@@ -24,19 +60,19 @@
 			</div>
 			<div class="nav">
 				<nav class="navbar">
-					<a href="">Home</a>
+					<a href="project.html">Home</a>
 					<a href="">News</a>
-					<a href="">Catalog</a>
-					<a href="">Top-100</a>
+					<a href="catalog.html">Catalog</a>
+					<a href="top.html">Top-100</a>
 					<a href="">Community</a>
-					<a href="">Help</a>
+					<a href="help.html">Help</a>
 				</nav>
 			</div>
 		</header>
 		<div class="main-wrapper">
 			<div class="main">
 				<div class="search">
-					<form action=""> 
+					<form action="catalog.html"> 
 						<input type="text" name="search" placeholder="Search anime by name">
 						<input type="submit" name="" value="">
 					</form>
@@ -45,7 +81,7 @@
 					<div id="block">
 						<span>Winter season anime</span>
 					</div>
-					<section class="slider">
+					<section class="slider" data-capacity="7">
 						<button id="left"><<</button>
 						<ul>
 							<li><a href="">
@@ -124,69 +160,53 @@
 					<section class="content">
 						<div id="block"><span>Latest updates</span></div>
 						<div class="latest">
-							<div class="container">
-								<img src="images/gridman.jpg">
+							<?php
+							for ($i=0; $i < 6; $i++) { 
+								$inf = mysqli_fetch_assoc($result);
+								?>
+								<div class="container">
+								<a href=<?="item.html?id=".$inf["id"]?>><img src=<?=$inf["image"]?>></a>
 								<div class="info">
-									<h3>Gridman</h3>
-									<span class="rating">6/10</span>
+									<h3><a href=<?="item.html?id=".$inf["id"]?>><?=$inf["name"]?></a></h3>
+									<span id="rating"><?=$inf["rating"]?></span>
 									<div class="description">
-										2018 | series | 11 series
+										<?=$inf["year"]." | ".$inf["type"]." | ".$inf["episodes"]?>
 									</div>
 									<p>
 										<span>Genre:</span>
 										<span class="genres">
-											Action, Comedy, Drama
+											<?=$inf["genre"]?>
 										</span>
 									</p>
 								</div>
-							</div>
-							<div class="container">
-								<img src="images/krolik.jpg">
-								<div class="info">
-									<h3>Etot glupui</h3>
-									<span class="rating">10/10</span>
-									<div class="description">
-										2018 | series | 11 series
-									</div>
-									<p>
-										<span>Genre:</span>
-										<span class="genres">
-											Comedy, Drama, Mystery
-										</span>
-									</p>
 								</div>
-							</div>
-							<div class="container">
-								<img src="images/sword.png">
-								<div class="info">
-									<h3>Sword Art Online</h3>
-									<span class="rating">8/10</span>
-									<div class="description">
-										2018 | series | 11 series
-									</div>
-									<p>
-										<span>Genre:</span>
-										<span class="genres">
-											Action, Comedy, Drama
-										</span>
-									</p>
-								</div>
-							</div>
+								<?php
+							}
+							?>
 						</div>
 					</section>
 					<aside class="sidebar">
 						<div id="block"><span>Filtr</span></div>
 						<div class="sidebar-content">
-							<form action="">
+							<form action="catalog.html">
 								<div class="part">
 									<label>Choose genre</label>
 									<div class="allselected"></div>
 									<input type="text" name="">
+									<?php 
+									$sql_genre = "SELECT DISTINCT `genre` FROM `anime-list` WHERE 1;";
+									$genres = mysqli_query($con, $sql_genre);
+									$num_of_genres = mysqli_num_rows($genres);
+									?>
 									<section><select name="selected_genres[]" class="chosen-multi genre" multiple="multiple" data-placeholder="Choose genres" size="5">
-											<option value="1">Action</option>
-											<option value="2">Drama</option>
-											<option value="3">Comedy</option>
-											<option value="4">Paranormal mystery</option>
+										<?php 
+										for ($i=0; $i < $num_of_genres; $i++) { 
+											$genre = mysqli_fetch_assoc($genres);
+											?>
+											<option value=<?=$genre["genre"]?>><?=$genre["genre"]?></option>
+											<?php
+										}
+										?>
 									</select></section>
 									
 								</div>
@@ -194,9 +214,20 @@
 									<label>Type of anime</label>
 									<div class="allselected"></div>
 									<input type="text" name="">
+									<?php 
+									$sql_type = "SELECT DISTINCT `type` FROM `anime-list` WHERE 1;";
+									$types = mysqli_query($con, $sql_type);
+									$num_of_types = mysqli_num_rows($types);
+									?>
 									<section><select name="selected_types[]" class="chosen-multi type" multiple="multiple" data-placeholder="Choose type of anime" size="2">
-											<option>Film</option>
-											<option>Series</option>
+										<?php 
+										for ($i=0; $i < $num_of_types; $i++) { 
+											$type = mysqli_fetch_assoc($types);
+											?>
+											<option value=<?=$type["type"]?>><?=$type["type"]?></option>
+											<?php
+										}
+										?>
 									</select></section>
 								</div>
 								<div class="part">
@@ -221,8 +252,6 @@
 										<option selected="selected">Rating</option>
 										<option>from A to Z</option>
 										<option>from Z to A</option>
-										<option>Date(new at first)</option>
-										<option>Date(old at first)</option>
 									</select>
 								</div>
 								<div class="submit-place">
