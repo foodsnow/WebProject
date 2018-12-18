@@ -1,46 +1,12 @@
-<?php
-$con = mysqli_connect("localhost", "root", "", "anime");
-if (!$con) {
-	die("Could not connect");
-}
-$username = "";
-$password = "";
-if (isset($_COOKIE["username"]) && isset($_COOKIE["password"])) {
-	$username = $_COOKIE["username"];
-	$password = $_COOKIE["password"];
-}
-if (isset($_REQUEST["username"]) && isset($_REQUEST["password"])) {
-	$username = $_REQUEST["username"];
-	$password = $_REQUEST["password"];
-	setcookie("username", $username);
-	setcookie("password", $password);
-}
-if (isset($_REQUEST["exit"])) {
-	if ($_REQUEST["exit"] == 1) {
-		$username = "";
-		$password = "";
-		setcookie("username", "", 0);
-		setcookie("password", "", 0);
-	}
-}
-$sql_user = "SELECT * FROM `users` WHERE `username`='$username' AND `password`='$password';";
-$users = mysqli_query($con, $sql_user);
-$num = mysqli_fetch_assoc($users);
-
-
-$sql = "SELECT * FROM `anime-list`;";
-$result = mysqli_query($con, $sql);
-?>
-<!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Top anime</title>
 	<link rel="stylesheet" href="css/style.css">
-	<script type="text/javascript" src="js/script1.js" defer></script>
+	<script type="text/javascript" src="js/script3.js" defer></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<div class="site">
+<div class="site">
 		<header>
 			<div class="top">
 				<div class="sign">
@@ -63,8 +29,8 @@ $result = mysqli_query($con, $sql);
 				?>
 				</div>
 				<div id="clearfix">
-					<form action="project.html" style="display: none">
-							<input type="text" name="username" placeholder="Nickname">
+					<form action="" style="display: none">
+							<input type="text" name="nickname" placeholder="Nickname">
 							<input type="password" name="password" placeholder="Password">
 							<input type="submit" value="Sign in">
 					</form>
@@ -89,115 +55,10 @@ $result = mysqli_query($con, $sql);
 						<input type="submit" name="" value="">
 					</form>
 				</div>
-				<div class="slider-container">
-					<div id="block">
-						<span>Winter season anime</span>
-					</div>
-					<section class="slider" data-capacity="7">
-						<button id="left"><<</button>
-						<ul>
-							<li><a href="">
-									<img src="images/krolik.jpg">
-									<div>Etot glupii svin</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/godzilla.jpg">
-									<div>Godzilla</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/gridman.jpg">
-									<div>Gridman</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/sword.png">
-									<div>Sword art online</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/sword.png">
-									<div>Sword art online</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/sword.png">
-									<div>Sword art online</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/sword.png">
-									<div>Sword art online</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/sword.png">
-									<div>Sword art online</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/sword.png">
-									<div>Sword art online</div>
-							</a></li>
-						</ul>
-						<button id="right">>></button>
-					</section>
-				</div>
-				<section class="news">
-					<div class="updates">
-						<div id="block">
-							<span>Updates</span>
-							<a href="">All updates</a>
-						</div>
-						<ul class="cont">
-							<li>
-								<a href="">
-									<span class="date">15 Dec</span>
-									<img src="images/krolik.jpg">
-									<span class="main-info">Lorem ipsum news</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="last_news">
-						<div id="block">
-							<span>News</span>
-							<a href="">All news</a>
-						</div>
-						<ul class="cont">
-							<li>
-								<a href="">
-									<span class="date">15 Dec</span>
-									<img src="">
-									<span class="main-info">Lorem ipsum news</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</section>
 				<div class="content-wrapper">
 					<section class="content">
-						<div id="block"><span>Latest updates</span></div>
-						<div class="latest">
-							<?php
-							for ($i=0; $i < 6; $i++) { 
-								$inf = mysqli_fetch_assoc($result);
-								?>
-								<div class="container">
-								<a href=<?="item.html?id=".$inf["id"]?>><img src=<?=$inf["image"]?>></a>
-								<div class="info">
-									<h3><a href=<?="item.html?id=".$inf["id"]?>><?=$inf["name"]?></a></h3>
-									<span id="rating"><?=$inf["rating"]?></span>
-									<div class="description">
-										<?=$inf["year"]." | ".$inf["type"]." | ".$inf["episodes"]?>
-									</div>
-									<p>
-										<span>Genre:</span>
-										<span class="genres">
-											<?=$inf["genre"]?>
-										</span>
-									</p>
-								</div>
-								</div>
-								<?php
-							}
-							?>
-						</div>
 					</section>
-					<aside class="sidebar">
+				<aside class="sidebar">
 						<div id="block"><span>Filtr</span></div>
 						<div class="sidebar-content">
 							<form action="catalog.html">
@@ -220,6 +81,7 @@ $result = mysqli_query($con, $sql);
 										}
 										?>
 									</select></section>
+									
 								</div>
 								<div class="part">
 									<label>Type of anime</label>
@@ -278,13 +140,6 @@ $result = mysqli_query($con, $sql);
 			<div class="footer_container">
 				<p>This is footer</p>
 				<p>Aytkazin Askar, Khamit Askar, Sundet</p>
-				<?php
-				if ($num["privelege"] == 1) {
-				?>
-				<a class="admin" href="admin.php">Admin mode</a>
-				<?php
-				}
-				?>
 			</div>
 		</footer>
 	</div>

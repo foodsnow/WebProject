@@ -1,8 +1,15 @@
-<?php
-$con = mysqli_connect("localhost", "root", "", "anime");
-if (!$con) {
-	die("Could not connect");
+<?php 
+$host = "localhost";
+$username = "root";
+$password = "";
+$db = "anime";
+
+$con = mysqli_connect($host,$username,$password,$db);
+$connection_error = mysqli_connect_error();
+if($connection_error != null){
+	echo "Error";
 }
+
 $username = "";
 $password = "";
 if (isset($_COOKIE["username"]) && isset($_COOKIE["password"])) {
@@ -15,32 +22,86 @@ if (isset($_REQUEST["username"]) && isset($_REQUEST["password"])) {
 	setcookie("username", $username);
 	setcookie("password", $password);
 }
-if (isset($_REQUEST["exit"])) {
-	if ($_REQUEST["exit"] == 1) {
-		$username = "";
-		$password = "";
-		setcookie("username", "", 0);
-		setcookie("password", "", 0);
+
+$search = "";
+if (isset($_REQUEST["search"])) {
+	$search = trim(preg_replace('/\s+/',' ', $_REQUEST["search"]));
+}
+$sql_search = "SELECT * FROM `anime-list` WHERE `name` LIKE '%{$search}%' ORDER BY `name` ASC;";
+
+
+$genre = [];
+$sql_genre = "SELECT DISTINCT `genre` FROM `anime-list` WHERE 1;";
+$genres = mysqli_query($con, $sql_genre);
+$num_of_genres = mysqli_num_rows($genres);
+for ($i=0; $i < $num_of_genres; $i++) { 
+	$genr = mysqli_fetch_assoc($genres);
+	$genre[] = $genr["genre"];
+}
+$type = [];
+$sql_type = "SELECT DISTINCT `type` FROM `anime-list` WHERE 1;";
+$types = mysqli_query($con, $sql_type);
+$num_of_types = mysqli_num_rows($types);
+for ($i=0; $i < $num_of_types; $i++) { 
+	$typ = mysqli_fetch_assoc($types);
+	$type[] = $typ["type"];
+}
+
+$year_begin = 0;
+$year_end = 2090;
+$sort = "rating";
+if (isset($_REQUEST["selected_genres"])) {
+	$genre = $_REQUEST["selected_genres"];
+}
+if (isset($_REQUEST["selected_types"])) {
+	$type = $_REQUEST["selected_types"];
+}
+if (isset($_REQUEST["begin_year"])) {
+	if ($_REQUEST["begin_year"]) {
+		$year_begin = $_REQUEST["begin_year"];
 	}
 }
+if (isset($_REQUEST["end_year"])) {
+	if ($_REQUEST["end_year"]) {
+		$year_end = $_REQUEST["end_year"];
+	}
+}
+if (isset($_REQUEST["selected_sort"])) {
+	$sort = $_REQUEST["selected_sort"];
+}
+
+if ($sort === "rating") {
+	$query = "SELECT * FROM `anime-list` WHERE `year` BETWEEN $year_begin AND $year_end ORDER BY `rating` DESC";
+}
+else if($sort === "acsending"){
+	$query = "SELECT * FROM `anime-list` WHERE `year` BETWEEN $year_begin AND $year_end ORDER BY `name` ASC";
+}else if($sort === "descending"){
+	$query = "SELECT * FROM `anime-list` WHERE `year` BETWEEN $year_begin AND $year_end ORDER BY `name` DESC";
+}
+
 $sql_user = "SELECT * FROM `users` WHERE `username`='$username' AND `password`='$password';";
 $users = mysqli_query($con, $sql_user);
 $num = mysqli_fetch_assoc($users);
 
-
-$sql = "SELECT * FROM `anime-list`;";
-$result = mysqli_query($con, $sql);
+$string = "";
+if ($search) {
+	$result = mysqli_query($con,$sql_search);
+	$string = "(by acsending) using Search";
+}else{
+	$result = mysqli_query($con,$query);
+	$string = "(by $sort) using Filtr";
+}
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Top anime</title>
 	<link rel="stylesheet" href="css/style.css">
-	<script type="text/javascript" src="js/script1.js" defer></script>
+	<script type="text/javascript" src="js/script3.js" defer></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<div class="site">
+<div class="site">
 		<header>
 			<div class="top">
 				<div class="sign">
@@ -63,8 +124,8 @@ $result = mysqli_query($con, $sql);
 				?>
 				</div>
 				<div id="clearfix">
-					<form action="project.html" style="display: none">
-							<input type="text" name="username" placeholder="Nickname">
+					<form action="" style="display: none">
+							<input type="text" name="nickname" placeholder="Nickname">
 							<input type="password" name="password" placeholder="Password">
 							<input type="submit" value="Sign in">
 					</form>
@@ -89,115 +150,48 @@ $result = mysqli_query($con, $sql);
 						<input type="submit" name="" value="">
 					</form>
 				</div>
-				<div class="slider-container">
-					<div id="block">
-						<span>Winter season anime</span>
-					</div>
-					<section class="slider" data-capacity="7">
-						<button id="left"><<</button>
-						<ul>
-							<li><a href="">
-									<img src="images/krolik.jpg">
-									<div>Etot glupii svin</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/godzilla.jpg">
-									<div>Godzilla</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/gridman.jpg">
-									<div>Gridman</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/sword.png">
-									<div>Sword art online</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/sword.png">
-									<div>Sword art online</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/sword.png">
-									<div>Sword art online</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/sword.png">
-									<div>Sword art online</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/sword.png">
-									<div>Sword art online</div>
-							</a></li>
-							<li><a href="">
-									<img src="images/sword.png">
-									<div>Sword art online</div>
-							</a></li>
-						</ul>
-						<button id="right">>></button>
-					</section>
-				</div>
-				<section class="news">
-					<div class="updates">
-						<div id="block">
-							<span>Updates</span>
-							<a href="">All updates</a>
-						</div>
-						<ul class="cont">
-							<li>
-								<a href="">
-									<span class="date">15 Dec</span>
-									<img src="images/krolik.jpg">
-									<span class="main-info">Lorem ipsum news</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="last_news">
-						<div id="block">
-							<span>News</span>
-							<a href="">All news</a>
-						</div>
-						<ul class="cont">
-							<li>
-								<a href="">
-									<span class="date">15 Dec</span>
-									<img src="">
-									<span class="main-info">Lorem ipsum news</span>
-								</a>
-							</li>
-						</ul>
-					</div>
-				</section>
 				<div class="content-wrapper">
 					<section class="content">
-						<div id="block"><span>Latest updates</span></div>
-						<div class="latest">
-							<?php
-							for ($i=0; $i < 6; $i++) { 
-								$inf = mysqli_fetch_assoc($result);
-								?>
-								<div class="container">
-								<a href=<?="item.html?id=".$inf["id"]?>><img src=<?=$inf["image"]?>></a>
-								<div class="info">
-									<h3><a href=<?="item.html?id=".$inf["id"]?>><?=$inf["name"]?></a></h3>
-									<span id="rating"><?=$inf["rating"]?></span>
-									<div class="description">
-										<?=$inf["year"]." | ".$inf["type"]." | ".$inf["episodes"]?>
-									</div>
-									<p>
-										<span>Genre:</span>
-										<span class="genres">
-											<?=$inf["genre"]?>
-										</span>
-									</p>
-								</div>
-								</div>
-								<?php
+						<div id="block"><span>Anime catalogue<?=$string?></span>
+						</div>
+						<div class="top-container">
+						<?php 
+						if(mysqli_num_rows($result)>0){
+							while($row = mysqli_fetch_assoc($result)){
+								if (in_array($row["genre"], $genre)) {
+									if (in_array($row["type"], $type)) {
+										?>
+										<div class="anime-column">
+											<a class="image-block" href=<?="item.html?id=".$row["id"]?>>
+												<span class="year-block"><?=$row["year"]?></span>
+												<img width="220" height="310" src=<?=$row["image"]?>/>
+											</a>
+											<div class="preview-info-block">
+												<a class="anime-title" href=<?="item.html?id=".$row["id"]?>>
+													<?=$row["name"]?>
+												</a>
+												<p>Views: <?=$row["views"]?></p>
+												<div class="rating-info" title=<?=$row["name"]?>>
+													<span class="main-rating-block">
+														<span class="main-rating"><?=$row["rating"]?></span>
+														<span class="main-rating-info"><?="(".$row["votes"].' votes)'?></span>
+													</span>
+												</div>
+											</div>
+										</div>
+										<?php
+									}
+								}
 							}
+						}else{
 							?>
+								<div class="anime-column">Nothing were found</div>
+							<?php
+						}
+						?>
 						</div>
 					</section>
-					<aside class="sidebar">
+				<aside class="sidebar">
 						<div id="block"><span>Filtr</span></div>
 						<div class="sidebar-content">
 							<form action="catalog.html">
@@ -220,6 +214,7 @@ $result = mysqli_query($con, $sql);
 										}
 										?>
 									</select></section>
+									
 								</div>
 								<div class="part">
 									<label>Type of anime</label>

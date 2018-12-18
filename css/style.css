@@ -69,6 +69,7 @@ header .top{
 #block span{
 	text-align: center;
 }
+
 header .top .sign{
 	display: flex;
 	width: 84%;
@@ -137,6 +138,7 @@ header .mobile-menu:hover{
 
 }
 header .nav{
+	z-index: 2;
 	padding: 0 8%;
 	background-color: #303030;
 	border-top: solid 4px #e25353;
@@ -498,6 +500,7 @@ header .navbar a:hover{
 /*ITEM PAGE END*/
 /*TOP PAGE BEGIN*/
 .top-container{
+	background-color: white;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -549,6 +552,9 @@ header .navbar a:hover{
     border: none;
     outline: none;
     box-sizing: border-box;
+}
+.anime-title:hover{
+	color: #e25353;
 }
  
 .anime-column .rating-info { 
@@ -657,8 +663,15 @@ header .navbar a:hover{
 	opacity: 1;
 }
 footer{
-	height: 170px;
+	height: 200px;
 	background-color: #303030;
+}
+footer .admin{
+	padding: 10px; 
+	box-sizing: border-box;
+	color: #e25353;
+	border: solid 2px white;
+	border-radius: 5px;
 }
 footer .footer_container{
 	width: 84%;
@@ -667,6 +680,7 @@ footer .footer_container{
 	box-sizing: border-box;
 }
 footer .footer_container p{
+	position: static;
 	margin: 0;
 	margin-bottom: 10px;
 	color: white;

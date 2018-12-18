@@ -1,0 +1,146 @@
+<?php 
+$host = "localhost";
+$username = "root";
+$password = "";
+$db = "anime";
+
+$db_conn = mysqli_connect($host,$username,$password,$db);
+$connection_error = mysqli_connect_error();
+if($connection_error != null){
+	echo "Error";
+}
+
+$query = "SELECT * FROM `anime-list` WHERE `type` = 'film'";
+$result = mysqli_query($db_conn,$query);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Top anime</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="D:/webtasks/prj/js/script3.js" defer></script>
+</head>
+<body>
+<div class="site">
+		<header>
+			<div class="top">
+				<div class="sign">
+					<a class="sign_in" href="">Sign in</a>
+					<a class="sign_up" href="">Sign Up</a>
+				</div>
+			</div>
+			<div class="nav">
+				<nav class="navbar">
+					<a href="project.html">Home</a>
+					<a href="">News</a>
+					<a href="">Catalog</a>
+					<a href="top.html">Top-100</a>
+					<a href="">Random</a>
+					<a href="">Community</a>
+					<a href="">Help</a>
+				</nav>
+			</div>
+		</header>
+		<div class="main-wrapper">
+			<div class="main">
+				<div class="search">
+					<form action=""> 
+						<input type="text" name="search" placeholder="Search anime by name">
+						<input type="submit" name="" value="">
+					</form>
+				</div>
+				<div class="content-wrapper">
+					<section class="content">
+						<div id="block"><span>Top Anime</span>
+						<a href="top.html">Top Series</a>
+						<a href="topfilm.html">Top Films</a><</div>
+						<div class="top-container">
+						<?php if(mysqli_num_rows($result)>0){
+								while($row = mysqli_fetch_assoc($result)){
+									echo '<div class="anime-column">';
+									echo '<a class="image-block" href="'.$row["link"].'">';
+									echo '<span class="year-block">'.$row["year"].'</span>';
+									echo '<img src="'.$row["image"].'" width="220" height="310"/>';
+									echo '</a>';
+									echo '<div class="preview-info-block">';
+									echo '<a class="anime-title" href="'.$row["link"].'">'.$row["name"].'</a>';
+									echo '<p>Views: '.$row["views"].'</p>';
+									echo '<div class="rating-info" title="'.$row["name"].'">';
+									
+									echo '<span class="main-rating-block">';
+									echo '<span class="main-rating">'.$row["rating"].'</span>';
+									echo '<span class="main-rating-info">('.$row["votes"].' votes)</span>';
+									echo '</span>';
+									echo '</div></div></div>';
+									
+								}}
+						?>
+						</div>
+					</section>
+				<aside class="sidebar">
+						<div id="block"><span>Filtr</span></div>
+						<div class="sidebar-content">
+							<form action="">
+								<div class="part">
+									<label>Choose genre</label>
+									<select name="selected_genres[]" class="chosen-multi" multiple="multiple" style="display: none;">
+										<option>Action</option>
+										<option>Drama</option>
+										<option>Comedy</option>
+										<option>Mystery</option>
+									</select>
+									
+									<div style="position: relative"><input type="text" name=""></div>
+								</div>
+								<div class="part">
+									<label>Type of anime</label>
+									<select name="selected_types[]" class="chosen-multi" multiple="multiple">
+										<option>Film</option>
+										<option>Series</option>
+									</select>
+									<input type="text" name="" style="position: relative;">
+								</div>
+								<div class="part">
+									<label>Status</label>
+									<select name="selected_status" class="chosen-single">
+										<option selected="selected">Do not count</option>
+										<option>Ongoing</option>
+										<option>Ended</option>
+										<option>Anons</option>
+									</select>
+								</div>
+								<div class="part">
+									<label>Year</label>
+									<div>
+										<input type="number" name="begin_year" placeholder="from">
+										<input type="number" name="end_year" placeholder="till">
+									</div>
+								</div>
+								<div class="part">
+									<label>Sort by</label>
+									<select name="selected_sort" class="chosen-single">
+										<option selected="selected">Rating</option>
+										<option>from A to Z</option>
+										<option>from Z to A</option>
+										<option>Date(new at first)</option>
+										<option>Date(old at first)</option>
+									</select>
+								</div>
+								<div class="submit-place">
+									<input type="submit" name="Submit" value="Submit">
+								</div>
+							</form>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+		<footer>
+			<div class="footer_container">
+				<p>This is footer</p>
+				<p>Aytkazin Askar, Khamit Askar, Sundet</p>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

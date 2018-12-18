@@ -1,12 +1,12 @@
 function sign(){
-	let sign_form = document.querySelector("header .top form");
+	let sign_form = document.querySelector("header .top #clearfix form");
 	if (sign_form.style.display === "none") {
 		sign_form.style.display = "block";
 	}else{
 		sign_form.style.display = "none";
 	}
 }
-document.querySelector("header .top .sign span").addEventListener("click", sign);
+document.querySelector("header .top .sign .sign_in").addEventListener("click", sign);
 
 
 let slides = document.querySelector(".main-wrapper .main .slider ul");
