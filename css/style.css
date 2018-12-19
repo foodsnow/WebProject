@@ -7,7 +7,6 @@ body{
 	font-size: 15px;
 }
 section{
-	height: 100%;
 	margin:0;
 	padding: 0;
 }
@@ -23,11 +22,18 @@ li, ul{
 button:focus {
 	outline:0;
 }
-input[type=submit], input[type=text], input[type=password]{
-	border: none;
+input[type=text], input[type=password]{
+	width: 100%;
+	padding: 10px;
+	height: 30px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
 }
 input[type=submit]{
 	background-color: #369b39;
+	padding: 5px;
+	color: white;
+	border: none;
 }
 select{
 	margin: 0;
@@ -68,6 +74,17 @@ header .top{
 }
 #block span{
 	text-align: center;
+}
+#block a{
+	position: absolute;
+	color: white;
+	text-decoration: underline;
+}
+#block a.right{
+	right: 10px;
+}
+#block a.left{
+	left: 10px;
 }
 
 header .top .sign{
@@ -112,11 +129,8 @@ header .top #clearfix form input[type=text], header .top #clearfix form input[ty
 	box-sizing: border-box;
 }
 header .top #clearfix form input[type=submit]{
-	background-color: #369b39;
 	height: 35px;
 	width: 70px;
-	padding: 5px;
-	color: white;
 }
 header .top .sign a.sign_up{
 	color: white;
@@ -274,12 +288,6 @@ header .navbar a:hover{
 }
 .news .updates, .news .last_news{
 	width: 49%;
-}
-.news #block a{
-	position: absolute;
-	right: 10px;
-	color: white;
-	text-decoration: underline;
 }
 .news .cont{
 	height: 500px;
@@ -582,6 +590,33 @@ header .navbar a:hover{
     box-sizing: border-box;
 }
 /*TOP PAGE END*/
+/*REGISTER PAGE BEGIN*/
+.register-container{
+	background-color: white;
+	padding: 15px;
+}
+.register-container h1{
+	font-size: 35px;
+	margin: 15px 0;
+	font-weight: normal;
+}
+.register-container form{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+.register-container form input[type=text], .register-container form input[type=password]{
+	width: 100%;
+	padding: 10px;
+	height: 30px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+}
+.register-container form input[type=submit]{
+	width: 100px;
+	height: 35px;
+}
+/*REGISTER PAGE END*/
 /*INTERFACE*/
 .content-wrapper .sidebar{
 	flex-grow: 1;
