@@ -26,6 +26,9 @@ function swipeRight(){
 	if (window.innerWidth <= 942) {
 		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "5";
 	}
+	else{
+		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "7";
+	}
 	let capacity = parseInt(document.querySelector(".main-wrapper .main .slider").dataset.capacity);
 	if (current + capacity >= len) {
 		trans = 0;

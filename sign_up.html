@@ -4,6 +4,49 @@ if (!$con) {
 	die("Could not connect");
 }
 
+$busy_names = [];
+$names_sql = "SELECT `username` FROM `users`;";
+$names = mysqli_query($con, $names_sql);
+while ($row = mysqli_fetch_assoc($names)) {
+	$busy_names[] = $row["username"];
+}
+
+
+$errors = [];
+$complete = false;
+$username = "";
+$password = "";
+$confirm_password = "";
+$initial = true;
+
+if (isset($_REQUEST["reg_name"])){
+	$username = $_REQUEST["reg_name"];
+	$initial = false;
+	if (trim($username) === "") {
+		$errors[] = "Username should not be empty";
+	}
+}
+if (isset($_REQUEST["password_1"]) || isset($_REQUEST["password_2"])) {
+	$password = $_REQUEST["password_1"];
+	$confirm_password = $_REQUEST["password_2"];
+	$initial = false;
+	if (trim($password) === "" || trim($confirm_password) === ""){
+		$errors[] = "Password and Confirm Password should not be empty";
+	}
+}
+if (in_array($username, $busy_names)) {
+	$errors[] = "Username '$username' already exists";
+}
+
+if ($password !== $confirm_password) {
+	$errors[] = "Password and Confirm Password doesn't equal to each other";
+}
+if (!$initial && count($errors) == 0) {
+	$insert_sql = "INSERT INTO `users`(`username`, `password`, `privelege`) VALUES ('$username', '$password', 0);";
+	$register = mysqli_query($con, $insert_sql);
+	$complete = true;
+}
+
 ?>
 <html>
 <head>
@@ -18,7 +61,7 @@ if (!$con) {
 			<div class="top">
 				<div class="sign">
 				<span class="sign_in">Sign in</span>
-				<a class="sign_up" href="register.html">Sign Up</a>
+				<a class="sign_up" href="sign_up.html">Sign Up</a>
 				</div>
 				<div id="clearfix">
 					<form action="" style="display: none">
@@ -52,8 +95,18 @@ if (!$con) {
 						<div class="register-container">
 							<h1>Register new account</h1>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu scelerisque felis imperdiet proin fermentum leo vel orci porta. Sit amet facilisis magna etiam. Laoreet sit amet cursus sit amet dictum sit amet justo. Ac turpis egestas maecenas pharetra convallis. Tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Ut diam quam nulla porttitor. Turpis massa sed elementum tempus egestas sed sed. Tortor id aliquet lectus proin nibh nisl condimentum id. Dignissim diam quis enim lobortis scelerisque fermentum. Ac tincidunt vitae semper quis lectus nulla at volutpat. Ut aliquam purus sit amet. Orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Semper quis lectus nulla at volutpat diam ut venenatis tellus. Rhoncus dolor purus non enim praesent elementum. Nec ullamcorper sit amet risus.</p>
-							<form method="post" action="sign_up.html">
-								<input type="text" name="username" placeholder="Please enter username">
+							<?php
+							foreach ($errors as $error) {
+								?>
+								<div id="errors"><?=$error?></div>
+								<?php
+							}
+							if ($complete) {
+								?><div class="complete">Resgistration was successfull</div><?php
+							}
+							?>
+							<form action="sign_up.html">
+								<input type="text" name="reg_name" placeholder="Please enter username">
 								<input type="password" name="password_1" placeholder="Please enter password">
 								<input type="password" name="password_2" placeholder="Please repeat password">
 								<input type="submit" class="btn" value="Register">

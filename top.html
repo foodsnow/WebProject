@@ -12,27 +12,19 @@ if($connection_error != null){
 
 $username = "";
 $password = "";
+$logged =  false;
 if (isset($_COOKIE["username"]) && isset($_COOKIE["password"])) {
 	$username = $_COOKIE["username"];
 	$password = $_COOKIE["password"];
+	$logged = true;
 }
-if (isset($_REQUEST["username"]) && isset($_REQUEST["password"])) {
-	$username = $_REQUEST["username"];
-	$password = $_REQUEST["password"];
-	setcookie("username", $username);
-	setcookie("password", $password);
+
+$num = false;
+if ($logged) {
+	$sql_user = "SELECT * FROM `users` WHERE `username`='$username' AND `password`='$password';";
+	$users = mysqli_query($con, $sql_user);
+	$num = mysqli_fetch_assoc($users);
 }
-if (isset($_REQUEST["exit"])) {
-	if ($_REQUEST["exit"] == 1) {
-		$username = "";
-		$password = "";
-		setcookie("username", "", 0);
-		setcookie("password", "", 0);
-	}
-}
-$sql_user = "SELECT * FROM `users` WHERE `username`='$username' AND `password`='$password';";
-$users = mysqli_query($con, $sql_user);
-$num = mysqli_fetch_assoc($users);
 
 
 $type = "serial";
@@ -56,26 +48,27 @@ $result = mysqli_query($con,$query);
 			<div class="top">
 				<div class="sign">
 				<?php
-				if ($num == false) {
+				if($logged && $num){
 				?>
-				<span class="sign_in">Sign in</span>
-				<a class="sign_up" href="sign_up.html">Sign Up</a>
+					<span class="sign_in" style="display: none;">Sign in</span>
+					<span class="nick"><?=$username?></span>
+					<form action="project.html">
+						<input type="hidden" name="exit" value="1" style="display: none;">
+						<input class="exit" type="submit" value="Exit">
+					</form>
 				<?php
-				}else{
+				}
+				else{
 				?>
-				<span class="sign_in" style="display: none;">Sign in</span>
-				<span class="nick"><?=$username?></span>
-				<form action="project.html">
-					<input type="hidden" name="exit" value="1" style="display: none;">
-					<input class="exit" type="submit" value="Exit">
-				</form>
+					<span class="sign_in">Sign in</span>
+					<a class="sign_up" href="sign_up.html">Sign Up</a>
 				<?php
 				}
 				?>
 				</div>
 				<div id="clearfix">
-					<form action="" style="display: none">
-							<input type="text" name="nickname" placeholder="Nickname">
+					<form action="project.html" style="display: none">
+							<input type="text" name="username" placeholder="Nickname">
 							<input type="password" name="password" placeholder="Password">
 							<input type="submit" value="Sign in">
 					</form>
@@ -213,7 +206,7 @@ $result = mysqli_query($con,$query);
 				<p>This is footer</p>
 				<p>Aytkazin Askar, Khamit Askar, Sundet</p>
 				<?php
-				if ($num["privelege"] == 1) {
+				if ($logged && $num["privelege"] == 1) {
 				?>
 				<a class="admin" href="admin.php">Admin mode</a>
 				<?php

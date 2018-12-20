@@ -86,6 +86,15 @@ header .top{
 #block a.left{
 	left: 10px;
 }
+#errors{
+	font-size: 13px;
+	margin-bottom: 10px;
+	padding: 10px 0;
+	width: 100%;
+	text-align: center;
+	color: white;
+	background-color: #e25353;
+}
 
 header .top .sign{
 	display: flex;
@@ -199,6 +208,7 @@ header .navbar a:hover{
 	box-sizing: border-box;
 	transition: 0.4;
 	height: 55px;
+	margin: 0;
 }
 .main-wrapper .main .search form input[type=submit]{
 	background: url("../images/search.png");
@@ -615,6 +625,15 @@ header .navbar a:hover{
 .register-container form input[type=submit]{
 	width: 100px;
 	height: 35px;
+}
+.register-container .complete{
+	font-size: 13px;
+	margin-bottom: 10px;
+	padding: 10px 0;
+	width: 100%;
+	text-align: center;
+	color: white;
+	background-color: #369b39;
 }
 /*REGISTER PAGE END*/
 /*INTERFACE*/
