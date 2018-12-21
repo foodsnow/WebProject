@@ -20,11 +20,12 @@ let trans = 0;
 let current = 0;
 
 function swipeRight(){
-	if (window.innerWidth <= 1128) {
-		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "6";
-	}
+	console.log(window.innerWidth);
 	if (window.innerWidth <= 942) {
 		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "5";
+	}
+	else if (window.innerWidth <= 1128) {
+		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "6";
 	}
 	else{
 		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "7";
@@ -40,11 +41,14 @@ function swipeRight(){
 	slides.style.transform = "translateX(" + -trans + "px)";
 }
 function swipeLeft(){
-	if (window.innerWidth <= 1128) {
-		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "6";
-	}
 	if (window.innerWidth <= 942) {
 		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "5";
+	}
+	else if (window.innerWidth <= 1128) {
+		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "6";
+	}
+	else{
+		document.querySelector(".main-wrapper .main .slider").dataset.capacity = "7";
 	}
 	let capacity = parseInt(document.querySelector(".main-wrapper .main .slider").dataset.capacity);
 	if (current <= 0) {
