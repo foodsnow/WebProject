@@ -1,6 +1,6 @@
 @font-face{
 	font-family: 'Manga Temple';
-	src: url("fonts/mangat.ttf");
+	src: url("../fonts/mangat.ttf");
 }
 html,body,section{
 	height: 100%;
