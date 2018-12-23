@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Дек 23 2018 г., 05:52
+-- Время создания: Дек 23 2018 г., 06:15
 -- Версия сервера: 10.1.31-MariaDB
 -- Версия PHP: 7.2.3
 
@@ -47,7 +47,7 @@ CREATE TABLE `anime-list` (
 --
 
 INSERT INTO `anime-list` (`id`, `name`, `rating`, `views`, `votes`, `image`, `link`, `year`, `genre`, `type`, `episodes`) VALUES
-(1, 'Fairy Tail S1', 9.15, 8714692, 20220, 'https://yummyanime.com/img/posters/1512496716.jpg', 'https://yummyanime.com/catalog/item/skazka-o-hvoste-fei', 2009, 'fantasy', 'serial', 12),
+(1, 'Fairy Tail S2', 9.15, 8714692, 20220, 'https://yummyanime.com/img/posters/1512496716.jpg', 'https://yummyanime.com/catalog/item/skazka-o-hvoste-fei', 2009, 'fantasy', 'serial', 12),
 (2, 'Bleach', 9.09, 5389211, 10947, 'https://yummyanime.com/img/posters/314.jpg', 'https://yummyanime.com/catalog/item/blich', 2004, 'fantasy', 'serial', 12),
 (3, 'Darling in the FranXX', 9, 5076412, 27276, 'https://yummyanime.com/img/posters/1514574607.jpg', 'https://yummyanime.com/catalog/item/milyj-vo-frankce', 2018, 'mecha', 'serial', 12),
 (4, 'Sword Art Online', 9.12, 5009789, 38135, 'https://yummyanime.com/img/posters/1514974917.jpg', 'https://yummyanime.com/catalog/item/skazka-o-hvoste-fei', 2012, 'fantasy', 'serial', 12),
@@ -97,6 +97,16 @@ INSERT INTO `anime-list` (`id`, `name`, `rating`, `views`, `votes`, `image`, `li
 --
 ALTER TABLE `anime-list`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `anime-list`
+--
+ALTER TABLE `anime-list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
