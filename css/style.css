@@ -656,6 +656,8 @@ header .navbar a:hover{
 .sidebar .sidebar-content .part .chosen-single{
 	width: 100%;
 	padding: 5px 10px;
+	background-color: white;
+	color: #636363;
 }
 .sidebar .sidebar-content .part .forYear{
 	display: flex;
@@ -771,6 +773,9 @@ footer .footer_container p{
 	header .top .sign{
 		justify-content: center;
 		align-items: center;
+	}
+	header .top .sign .nick, header .top .sign .exit{
+		margin: 10px 0;
 	}
 	header .top .sign a, .top .sign .sign_in{
 		margin: 10px 0;

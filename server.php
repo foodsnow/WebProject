@@ -14,7 +14,6 @@
 	$genre = "";
 	$type = "";
 	$episodes=0;
-	$id = 0;
 	$update = false;
 
 	if (isset($_POST['save'])) {
@@ -51,7 +50,7 @@
 		$episodes = $_POST["episodes"];
 		
 
-		mysqli_query($db, "UPDATE `anime-list` SET `id`='$idshka',`name`='$name',`rating`='$rating',`views`='$views',`votes`='$votes',`image`='$image',`link`='$link',`year`='$year',`genre`='$genre',`type`='$type',`episodes`='$episodes' WHERE `id`='$id'");
+		mysqli_query($db, "UPDATE `anime-list` SET `id`='$idshka',`name`='$name',`rating`='$rating',`views`='$views',`votes`='$votes',`image`='$image',`link`='$link',`year`='$year',`genre`='$genre',`type`='$type',`episodes`='$episodes' WHERE `id`='$idshka'");
 		$_SESSION['message'] = "Anime updated!"; 
 		header('location: admin.php');
 

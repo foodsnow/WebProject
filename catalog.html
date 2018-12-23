@@ -113,7 +113,7 @@ if ($search) {
 				?>
 					<span class="sign_in" style="display: none;">Sign in</span>
 					<span class="nick"><?=$username?></span>
-					<form action="project.html">
+					<form action="project.html" method="post">
 						<input type="hidden" name="exit" value="1" style="display: none;">
 						<input class="exit" type="submit" value="Exit">
 					</form>
@@ -128,7 +128,7 @@ if ($search) {
 				?>
 				</div>
 				<div id="clearfix">
-					<form action="project.html" style="display: none">
+					<form action="project.html" style="display: none" method="post">
 							<input type="text" name="username" placeholder="Nickname">
 							<input type="password" name="password" placeholder="Password">
 							<input type="submit" value="Sign in">
@@ -146,7 +146,7 @@ if ($search) {
 		<div class="main-wrapper">
 			<div class="main">
 				<div class="search">
-					<form action="catalog.html"> 
+					<form action="catalog.html" method="post"> 
 						<input type="text" name="search" placeholder="Search anime by name">
 						<input type="submit" name="" value="">
 					</form>
@@ -195,7 +195,7 @@ if ($search) {
 				<aside class="sidebar">
 						<div id="block"><span>Filtr</span></div>
 						<div class="sidebar-content">
-							<form action="catalog.html">
+							<form action="catalog.html" method="post">
 								<div class="part">
 									<label>Choose genre</label>
 									<div class="allselected"></div>

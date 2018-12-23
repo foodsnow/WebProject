@@ -52,7 +52,7 @@ $result = mysqli_query($con,$query);
 				?>
 					<span class="sign_in" style="display: none;">Sign in</span>
 					<span class="nick"><?=$username?></span>
-					<form action="project.html">
+					<form action="project.html" method="post">
 						<input type="hidden" name="exit" value="1" style="display: none;">
 						<input class="exit" type="submit" value="Exit">
 					</form>
@@ -67,7 +67,7 @@ $result = mysqli_query($con,$query);
 				?>
 				</div>
 				<div id="clearfix">
-					<form action="project.html" style="display: none">
+					<form action="project.html" style="display: none" method="post">
 							<input type="text" name="username" placeholder="Nickname">
 							<input type="password" name="password" placeholder="Password">
 							<input type="submit" value="Sign in">
@@ -85,7 +85,7 @@ $result = mysqli_query($con,$query);
 		<div class="main-wrapper">
 			<div class="main">
 				<div class="search">
-					<form action="catalog.html"> 
+					<form action="catalog.html" method="post"> 
 						<input type="text" name="search" placeholder="Search anime by name">
 						<input type="submit" name="" value="">
 					</form>
@@ -99,30 +99,33 @@ $result = mysqli_query($con,$query);
 						<div class="top-container">
 						<?php if(mysqli_num_rows($result)>0){
 								while($row = mysqli_fetch_assoc($result)){
-									echo '<div class="anime-column">';
-									echo '<a class="image-block" href="'.$row["link"].'">';
-									echo '<span class="year-block">'.$row["year"].'</span>';
-									echo '<img src="'.$row["image"].'" width="220" height="310"/>';
-									echo '</a>';
-									echo '<div class="preview-info-block">';
-									echo '<a class="anime-title" href="'.$row["link"].'">'.$row["name"].'</a>';
-									echo '<p>Views: '.$row["views"].'</p>';
-									echo '<div class="rating-info" title="'.$row["name"].'">';
-									
-									echo '<span class="main-rating-block">';
-									echo '<span class="main-rating">'.$row["rating"].'</span>';
-									echo '<span class="main-rating-info">('.$row["votes"].' votes)</span>';
-									echo '</span>';
-									echo '</div></div></div>';
-									
-								}}
+									?>
+									<div class="anime-column">
+										<a class="image-block" href="item.html?id=<?=$row["id"]?>">
+										<span class="year-block"><?=$row["year"]?></span>
+										<img src=<?=$row["image"]?> width="220" height="310"/>
+										</a>
+										<div class="preview-info-block">
+											<a class="anime-title" href="item.html?id=<?=$row["id"]?>"><?=$row["name"]?></a>
+											<p>Views: <?=$row["views"]?></p>
+											<div class="rating-info" title=<?=$row["name"]?>>
+												<span class="main-rating-block">
+												<span class="main-rating"><?=$row["rating"]?></span>
+												<span class="main-rating-info">(<?=$row["votes"]?> votes)</span>
+												</span>
+											</div>
+										</div>
+									</div>
+									<?php
+								}
+							}
 						?>
 						</div>
 					</section>
 				<aside class="sidebar">
 						<div id="block"><span>Filtr</span></div>
 						<div class="sidebar-content">
-							<form action="catalog.html">
+							<form action="catalog.html" method="post">
 								<div class="part">
 									<label>Choose genre</label>
 									<div class="allselected"></div>

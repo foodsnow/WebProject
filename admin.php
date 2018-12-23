@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="css/stylecrud.css">
 </head>
 <body>
+	<a href="project.html">Back</a>
 	<?php if (isset($_SESSION['message'])): ?>
 	<div class="msg">
 		<?php 
@@ -78,7 +79,6 @@
 	<?php } ?>
 </table>
 	<form method="post" action="server.php" >
-		<input type="hidden" name="id" value="<?php echo $id; ?>">
 		<div class="input-group">
 			<label>id</label>
 			<input type="number" name="idshka" value="<?php echo $idshka; ?>">

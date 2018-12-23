@@ -64,8 +64,8 @@ if (!$initial && count($errors) == 0) {
 				<a class="sign_up" href="sign_up.html">Sign Up</a>
 				</div>
 				<div id="clearfix">
-					<form action="" style="display: none">
-							<input type="text" name="nickname" placeholder="Nickname">
+					<form action="project.html" style="display: none" method="post">
+							<input type="text" name="username" placeholder="Nickname">
 							<input type="password" name="password" placeholder="Password">
 							<input type="submit" value="Sign in">
 					</form>
@@ -82,7 +82,7 @@ if (!$initial && count($errors) == 0) {
 		<div class="main-wrapper">
 			<div class="main">
 				<div class="search">
-					<form action="catalog.html"> 
+					<form action="catalog.html" method="post"> 
 						<input type="text" name="search" placeholder="Search anime by name">
 						<input type="submit" name="" value="">
 					</form>
@@ -102,7 +102,7 @@ if (!$initial && count($errors) == 0) {
 								?><div class="complete">Resgistration was successfull</div><?php
 							}
 							?>
-							<form action="sign_up.html">
+							<form action="sign_up.html" method="post">
 								<input type="text" name="reg_name" placeholder="Please enter username">
 								<input type="password" name="password_1" placeholder="Please enter password">
 								<input type="password" name="password_2" placeholder="Please repeat password">
@@ -113,7 +113,7 @@ if (!$initial && count($errors) == 0) {
 					<aside class="sidebar">
 						<div id="block"><span>Filtr</span></div>
 						<div class="sidebar-content">
-							<form action="catalog.html">
+							<form action="catalog.html" method="post">
 								<div class="part">
 									<label>Choose genre</label>
 									<div class="allselected"></div>
